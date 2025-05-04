@@ -1,0 +1,657 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Textme</title>
+    <link rel="icon" href="/img/textme_logo.ico" type="image/x-icon">
+
+<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+    crossorigin="anonymous"></script>
+
+
+  <!-- Agregar CSS dentro de <style> -->
+
+<style>
+    body {
+    background-color: rgb(241, 241, 241);
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #007bff;
+    padding: 10px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Aseguramos que el header ocupe todo el ancho */
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    max-width: 1200px; /* O un ancho máximo que consideres adecuado */
+    margin: 0 auto; /* Centra el contenido del header */
+}
+
+.header-content img {
+    border-radius: 50%;
+}
+
+.header-content h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    margin: 0;
+}
+
+.header-icons {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px; /* O un ancho máximo que consideres adecuado */
+    margin: 0 auto; /* Centra el contenido principal */
+}
+
+.columna-izquierda, .columna-derecha {
+    flex: 1;
+    /* min-height: 100vh; Ya no es necesario forzar la altura al 100vh aquí */
+}
+
+.seccion {
+    background-color: white;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.publicacion {
+    margin-bottom: 15px;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.gap-3 {
+    gap: 10px;
+}
+
+.rounded-circle {
+    border-radius: 50%;
+}
+
+.rounded {
+    border-radius: 8px;
+}
+
+.input-group {
+    width: 100%;
+}
+
+.input-group-text i {
+    font-size: 1.5rem;
+}
+
+.input-group input {
+    border-radius: 25px;
+    padding-left: 10px;
+}
+
+.card-body img {
+    max-width: 100%;
+    object-fit: cover;
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+    .main-content {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .header-content h1 {
+        font-size: 1.5rem;
+    }
+
+    .columna-izquierda,
+    .columna-derecha {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .input-group {
+        margin-top: 10px;
+    }
+
+    .publicacion img {
+        height: auto; /* Permite que la altura se ajuste al ancho */
+        max-height: 400px; /* O la altura máxima que desees */
+    }
+}
+
+/* Ajustes para pantallas más grandes */
+@media (min-width: 992px) {
+    .main-content {
+        gap: 30px;
+    }
+
+    .publicacion img {
+        height: auto; /* Permite que la altura se ajuste al ancho */
+        max-height: 500px; /* O la altura máxima que desees */
+    }
+
+    .header-content h1 {
+        font-size: 2.5rem;
+    }
+}
+
+/* Estilos específicos para las publicaciones */
+.publicaciones {
+    /* No necesitas un ancho máximo aquí, ya que el .main-content lo controlará */
+    margin: 0 auto; /* Centra las publicaciones dentro de la columna izquierda */
+    padding: 0; /* Elimina el padding que podría generar espacio innecesario */
+}
+
+.publicaciones .card {
+    /* El ancho máximo ya está controlado por el .main-content */
+    margin-bottom: 20px; /* Mantiene el espacio entre las publicaciones */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra más sutil */
+}
+
+.publicaciones .card > .px-3 > img {
+    width: 100% !important; /* Asegura que la imagen ocupe todo el ancho del contenedor */
+    height: auto !important; /* La altura se ajusta proporcionalmente */
+    object-fit: cover; /* Cubre el contenedor manteniendo la proporción */
+    max-height: 600px; /* O una altura máxima razonable */
+}
+
+.columna-izquierda .card.shadow-sm.w-70.mx-auto {
+    width: 100% !important; /* La sección de "En qué estás pensando" ocupa todo el ancho de la columna izquierda */
+    max-width: none !important; /* Elimina el ancho máximo */
+}
+
+
+</style>
+
+
+</head>
+<body>
+
+ <!-- HEADER arriba de todo -->
+
+ <header class="container-fluid bg-primary py-2 shadow-sm"> <!--container-fluid: ocupa todo el ancho-py(padding tipo y)
+    -shadow-none – sin sombra,shadow-sm – sombra pequeña,shadow – sombra normal,shadow-lg – sombra más fuerte  -->
+    <div class="d-flex justify-content-between align-items-center">
+
+<div class="d-flex align-items-center gap-3"> 
+    <img src="../img/textme_logo.jpeg" alt="Logo TextMe" width="60" class="rounded-circle shadow-sm"> <!--rounded-circle Imagen redonda -->
+    
+    <form class="d-none d-md-block">  <!--d-none: Oculta completamente el formulario por defecto,
+        d-md-block:El formulario solo se muestra en pantallas medianas o más grandes  -->
+
+      <div class="input-group"> <!--input-group se usa para alinear campos de entrada junto con contenido adicional, como íconos o botones -->
+        <input type="text" class="form-control" placeholder="Buscar en TextMe">
+        <span class="input-group-text"><i class='bx bx-search'></i></span>
+      </div>
+    </form>
+  </div>
+
+  <!-- Título -->
+  <h1 class="fs-1 fw-bold m-0 text-white text-center">TextMe</h1>       <!-- fs(font size)-fw font-weight: bold- m (margin),  -->
+
+
+  <!-- Íconos -->
+  <ul class="list-unstyled d-flex gap-3 m-0 align-items-center">
+    <li><i class='bx bxs-bell fs-1 text-white'></i></li>
+    <li><i class='bx bxs-chat fs-1 text-white'></i></li>
+    <li><i class='bx bx-log-out fs-1 text-white'></i></li>
+  </ul>
+</div>
+
+
+  </header>
+
+<main class="container py-4 main-content">
+
+  <div class="columna-izquierda">
+
+<section class="mb-4">
+    <div class="card shadow-sm w-70 mx-auto">
+      <!-- Cuerpo del card -->
+      <div class="card-body p-3">
+        
+        <!-- Perfil y campo de publicación -->
+        <div class="d-flex align-items-center gap-3 mb-3">
+          <img src="../img/Hans.jpg" alt="Foto perfil" width="70" height="70" class="rounded-circle shadow-lg">
+          <form class="flex-grow-1">
+            <input type="text" class="form-control rounded-input" placeholder="¿En qué estás pensando..?" maxlength="200">
+          </form>
+        </div>
+
+  
+        <!-- Línea horizontal -->
+        <hr class="my-3">
+
+        <!-- Botones de acción con íconos -->
+        <div class="d-flex flex-wrap gap-3 justify-content-center mb-3">
+          <button class="btn btn-outline-primary d-flex align-items-center gap-2 btn-sm">
+            <i class='bx bxs-camera fs-5'></i> <span>Foto/Video</span>
+          </button>
+  
+          <button class="btn btn-outline-danger d-flex align-items-center gap-2 btn-sm">
+            <i class='bx bxs-heart fs-5'></i> <span>Sentimiento/Actividad</span>
+          </button>
+  
+          <button class="btn btn-outline-success d-flex align-items-center gap-2 btn-sm">
+            <i class='bx bxs-location-plus fs-5'></i> <span>Ubicación</span>
+          </button>
+        </div>
+  
+    
+        
+      </div>
+    </div>
+  </section>
+  
+
+    <!-- Publicaciones -->
+    <section class="publicaciones">
+
+        <!-- Publicación 1 -->
+        <article class="card mb-4 rounded-4 shadow" style="max-width: 700px; margin: auto; box-shadow: 0px 4px 6px rgba(255, 255, 255, 0.5);">
+            <div class="card-body d-flex gap-3">
+              <!-- Imagen de perfil -->
+              <img src="../img/perfil.jpg" alt="Perfil" width="50" height="50" class="rounded-circle shadow-sm">
+          
+              <!-- Contenido de la publicación -->
+              <div>
+                <div class="d-flex align-items-center gap-1">
+                  <strong>Misael Mach</strong>
+                  <a href="#" class="ms-2 text-primary ml-linea">Seguir</a>
+                </div>
+                <small class="text-muted">2 de Mayo del 2025 a las 6:12 p.m. <i class="bx bx-world"></i></small>
+                <p class="mt-2 mb-0 ml-custom"></p>
+              </div>
+            </div>
+          
+            <!-- Contenedor para achicar la imagen y dejar espacio a los lados -->
+            <div class="px-3"> <!-- padding horizontal -->
+              <img src="../img/misaelcontenido.jpg" class="img-fluid rounded" alt="Publicación de Juan" style="height: 500px; object-fit: cover; width: 100%;">
+            </div>
+          
+            <!-- Reacciones -->
+            <div class="card-body p-3">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <!-- Textos a la izquierda -->
+                <div>
+                  <div><strong>209 Reacciones</strong></div>
+                  <div><strong>12 Comentarios</strong></div>
+                </div>
+          
+                <!-- Íconos a la derecha -->
+                <div class="d-flex align-items-center gap-4">
+                  <i class='bx bxs-heart bx-tada bx-flip-horizontal fs-2 text-danger'></i> 
+                  <i class='bx bxs-message-rounded-dots bx-tada fs-2 text-primary'></i>
+                </div>
+              </div>
+            </div>
+          </article>
+          
+
+        <!-- Publicación 2 -->
+
+
+
+          <article class="card mb-4 rounded-4 shadow" style="max-width: 700px; margin: auto; box-shadow: 0px 4px 6px rgba(255, 255, 255, 0.5);">
+            <div class="card-body d-flex gap-3">
+              <!-- Imagen de perfil -->
+              <img src="../img/MadridEscudo.jpg" alt="Perfil" width="50" height="50" class="rounded-circle shadow-sm">
+          
+              <!-- Contenido de la publicación -->
+              <div>
+                <div class="d-flex align-items-center gap-1">
+                  <strong>Real Madrid C.F.</strong>
+                  <a href="#" class="ms-2 text-primary ml-linea">Siguiendo</a>
+                </div>
+                <small class="text-muted">1 de Junio del 2024 a las 9:26 p.m. <i class="bx bx-world"></i></small>
+                <p class="mt-2 mb-0 ml-custom">CAMPEONEEEES</p>
+              </div>
+            </div>
+          
+            <!-- Contenedor para achicar la imagen y dejar espacio a los lados -->
+            <div class="px-3"> <!-- padding horizontal -->
+              <img src="../img/Madrid.avif" class="img-fluid rounded" alt="Publicación de Juan" style="height: 400px; object-fit: cover; width: 100%;">
+            </div>
+          
+            <!-- Reacciones -->
+            <div class="card-body p-3">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <!-- Textos a la izquierda -->
+                <div>
+                  <div><strong>29,936 Reacciones</strong></div>
+                  <div><strong>10,202 Comentarios</strong></div>
+                </div>
+          
+                <!-- Íconos a la derecha -->
+                <div class="d-flex align-items-center gap-4">
+                  <i class='bx bxs-heart bx-tada bx-flip-horizontal fs-2 text-danger'></i> 
+                  <i class='bx bxs-message-rounded-dots bx-tada fs-2 text-primary'></i>
+                </div>
+              </div>
+            </div>
+          </article>
+          
+      
+        <!-- Publicación 3 -->
+
+
+
+          <article class="card mb-4 rounded-4 shadow" style="max-width: 700px; margin: auto; box-shadow: 0px 4px 6px rgba(255, 255, 255, 0.5);">
+            <div class="card-body d-flex gap-3">
+              <!-- Imagen de perfil -->
+              <img src="../img/PaulaSamame.jpg" alt="Perfil" width="50" height="50" class="rounded-circle shadow-sm">
+          
+              <!-- Contenido de la publicación -->
+              <div>
+                <div class="d-flex align-items-center gap-1">
+                  <strong>Paula Samame</strong>
+                  <a href="#" class="ms-2 text-primary ml-linea">Siguiendo</a>
+                </div>
+                <small class="text-muted">23 de Marzo del 2022 a las 9:26 p.m. <i class="bx bx-world"></i></small>
+                <p class="mt-2 mb-0 ml-custom">Ponte Lokita bb</p>
+              </div>
+            </div>
+          
+            <!-- Contenedor para achicar la imagen y dejar espacio a los lados -->
+            <div class="px-3"> <!-- padding horizontal -->
+              <img src="../img/PaulaAlvaro.avif" class="img-fluid rounded" alt="Publicación de Juan" style="height: 400px; object-fit: cover; width: 100%;">
+            </div>
+          
+            <!-- Reacciones -->
+            <div class="card-body p-3">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <!-- Textos a la izquierda -->
+                <div>
+                  <div><strong>100 Reacciones</strong></div>
+                  <div><strong>4 Comentarios</strong></div>
+                </div>
+          
+                <!-- Íconos a la derecha -->
+                <div class="d-flex align-items-center gap-4">
+                  <i class='bx bxs-heart bx-tada bx-flip-horizontal fs-2 text-danger'></i> 
+                  <i class='bx bxs-message-rounded-dots bx-tada fs-2 text-primary'></i>
+                </div>
+              </div>
+            </div>
+          </article>
+          
+      
+        <!-- Publicación 4 -->
+
+
+          <article class="card mb-4 rounded-4 shadow" style="max-width: 700px; margin: auto; box-shadow: 0px 4px 6px rgba(255, 255, 255, 0.5);">
+            <div class="card-body d-flex gap-3">
+              <!-- Imagen de perfil -->
+              <img src="../img/Arturo.jpg" alt="Perfil" width="50" height="50" class="rounded-circle shadow-sm">
+          
+              <!-- Contenido de la publicación -->
+              <div>
+                <div class="d-flex align-items-center gap-1">
+                  <strong>Arturo Cabana</strong>
+                  <a href="#" class="ms-2 text-primary ml-linea">Siguiendo</a>
+                </div>
+                <small class="text-muted">07 de Octubre del 2018 a las 6:16 p.m. <i class="bx bx-world"></i></small>
+                <p class="mt-2 mb-0 ml-custom">Mi prime...</p>
+              </div>
+            </div>
+          
+            <!-- Contenedor para achicar la imagen y dejar espacio a los lados -->
+            <div class="px-3"> <!-- padding horizontal -->
+              <img src="../img/ArturoCabana.jpg" class="img-fluid rounded" alt="Publicación de Juan" style="height: 400px; object-fit: cover; width: 100%;">
+            </div>
+          
+            <!-- Reacciones -->
+            <div class="card-body p-3">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <!-- Textos a la izquierda -->
+                <div>
+                  <div><strong>29 Reacciones</strong></div>
+                  <div><strong>2 Comentarios</strong></div>
+                </div>
+          
+                <!-- Íconos a la derecha -->
+                <div class="d-flex align-items-center gap-4">
+                  <i class='bx bxs-heart bx-tada bx-flip-horizontal fs-2 text-danger'></i> 
+                  <i class='bx bxs-message-rounded-dots bx-tada fs-2 text-primary'></i>
+                </div>
+              </div>
+            </div>
+          </article>
+          
+                  <!-- Publicación 5 -->
+
+
+
+          <article class="card mb-4 rounded-4 shadow" style="max-width: 700px; margin: auto; box-shadow: 0px 4px 6px rgba(255, 255, 255, 0.5);">
+            <div class="card-body d-flex gap-3">
+              <!-- Imagen de perfil -->
+              <img src="../img/Juanito.jpg" alt="Perfil" width="50" height="50" class="rounded-circle shadow-sm">
+          
+              <!-- Contenido de la publicación -->
+              <div>
+                <div class="d-flex align-items-center gap-1">
+                  <strong>Juan Mach</strong>
+                  <a href="#" class="ms-2 text-primary ml-linea">Siguiendo</a>
+                </div>
+                <small class="text-muted">2 de Febrero del 2022 a las 10:01 a.m. <i class="bx bx-world"></i></small>
+                <p class="mt-2 mb-0 ml-custom">En cuzco</p>
+              </div>
+            </div>
+          
+            <!-- Contenedor para achicar la imagen y dejar espacio a los lados -->
+            <div class="px-3"> <!-- padding horizontal -->
+              <img src="../img/JuanitoMach.jpg" class="img-fluid rounded" alt="Publicación de Juan" style="height: 400px; object-fit: cover; width: 100%;">
+            </div>
+          
+            <!-- Reacciones -->
+            <div class="card-body p-3">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <!-- Textos a la izquierda -->
+                <div>
+                  <div><strong>310 Reacciones</strong></div>
+                  <div><strong>4 Comentarios</strong></div>
+                </div>
+          
+                <!-- Íconos a la derecha -->
+                <div class="d-flex align-items-center gap-4">
+                  <i class='bx bxs-heart bx-tada bx-flip-horizontal fs-2 text-danger'></i> 
+                  <i class='bx bxs-message-rounded-dots bx-tada fs-2 text-primary'></i>
+                </div>
+              </div>
+            </div>
+          </article>
+          
+
+
+
+
+          <article class="card mb-4 rounded-4 shadow" style="max-width: 700px; margin: auto; box-shadow: 0px 4px 6px rgba(255, 255, 255, 0.5);">
+            <div class="card-body d-flex gap-3">
+              <!-- Imagen de perfil -->
+              <img src="../img/logocibertec.png" alt="Perfil" width="50" height="50" class="rounded-circle shadow-sm">
+          
+              <!-- Contenido de la publicación -->
+              <div>
+                <div class="d-flex align-items-center gap-1">
+                  <strong>Cibertec</strong>
+                  <a href="#" class="ms-2 text-primary ml-linea">Siguiendo</a>
+                </div>
+                <small class="text-muted">29 de Abril del 2025 a las 5:12 p.m. <i class="bx bx-world"></i></small>
+                <p class="mt-2 mb-0 ml-custom">¿Aún no sabes qué estudiar? 🤔
+                  Nuestro coordinador académico de la facultad de Tecnologías de la Información, Ricardo Gálvez 👨‍🏫, te ofrece tres razones para considerar estudiar la carrera de Computación e Informática en la modalidad semipresencial y 100 % virtual como tu futuro profesional 🎨✨.
+                  ¿Qué esperas para unirte a Cibertec y comenzar tu camino en esta emocionante carrera? 🚀👩‍🎨👨‍🎨
+                  Conoce más sobre la carrera aquí: 
+                  https://www.cibertec.edu.pe/.../computacion-e-informatica/</p>
+              </div>
+            </div>
+          
+            <!-- Contenedor para achicar la imagen y dejar espacio a los lados -->
+            <div class="px-3"> <!-- padding horizontal -->
+              <img src="../img/Cibertec_Publicidad.webp" class="img-fluid rounded" alt="Publicación de Juan" style="height: 300px; object-fit: cover; width: 100%;">
+            </div>
+          
+            <!-- Reacciones -->
+            <div class="card-body p-3">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <!-- Textos a la izquierda -->
+                <div>
+                  <div><strong>1,223 Reacciones</strong></div>
+                  <div><strong>150 Comentarios</strong></div>
+                </div>
+          
+                <!-- Íconos a la derecha -->
+                <div class="d-flex align-items-center gap-4">
+                  <i class='bx bxs-heart bx-tada bx-flip-horizontal fs-2 text-danger'></i> 
+                  <i class='bx bxs-message-rounded-dots bx-tada fs-2 text-primary'></i>
+                </div>
+              </div>
+            </div>
+          </article>
+
+        <!-- Publicación 6 -->
+
+
+          <article class="card mb-4 rounded-4 shadow" style="max-width: 700px; margin: auto; box-shadow: 0px 4px 6px rgba(255, 255, 255, 0.5);">
+            <div class="card-body d-flex gap-3">
+              <!-- Imagen de perfil -->
+              <img src="../img/boris.jpg" alt="Perfil" width="50" height="50" class="rounded-circle shadow-sm">
+          
+              <!-- Contenido de la publicación -->
+              <div>
+                <div class="d-flex align-items-center gap-1">
+                  <strong>Jose Guanilo</strong>
+                  <a href="#" class="ms-2 text-primary ml-linea">Siguiendo</a>
+                </div>
+                <small class="text-muted">22 de Agosto del 2023 a las 7:56 a.m. <i class="bx bx-world"></i></small>
+                <p class="mt-2 mb-0 ml-custom">Con los panas</p>
+              </div>
+            </div>
+          
+            <!-- Contenedor para achicar la imagen y dejar espacio a los lados -->
+            <div class="px-3"> <!-- padding horizontal -->
+              <img src="../img/borisGuanilo.jpg" class="img-fluid rounded" alt="Publicación de Juan" style="height: 500px; object-fit: cover; width: 100%;">
+            </div>
+          
+            <!-- Reacciones -->
+            <div class="card-body p-3">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <!-- Textos a la izquierda -->
+                <div>
+                  <div><strong>42 Reacciones</strong></div>
+                  <div><strong>19 Comentarios</strong></div>
+                </div>
+          
+                <!-- Íconos a la derecha -->
+                <div class="d-flex align-items-center gap-4">
+                  <i class='bx bxs-heart bx-tada bx-flip-horizontal fs-2 text-danger'></i> 
+                  <i class='bx bxs-message-rounded-dots bx-tada fs-2 text-primary'></i>
+                </div>
+              </div>
+            </div>
+          </article>
+      </section>
+    </div>
+  </div>
+
+
+<!-- COLUMNA DERECHA -->
+
+<div class="columna-derecha">
+  <div class="col-md-4">
+
+<div class="card mb-3">
+  <div class="card-header">Notificaciones</div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">📬 Natalia comentó tu publicación</li>
+    <li class="list-group-item">👍 Juan le dio like a tu foto</li>
+    <li class="list-group-item">👥 Nueva solicitud de amistad</li>
+  </ul>
+</div>
+
+<!-- Amigos sugeridos -->
+<div class="card mb-3">
+  <div class="card-header">Amigos sugeridos</div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item d-flex align-items-center">
+      <img src="../img/AilenCastro.jpg"  width="30"class=" me-2" />
+      <span>Ailen Castro </span>
+      <button class="btn btn-sm btn-primary ms-auto">Agregar</button>
+    </li>
+    <li class="list-group-item d-flex align-items-center">
+      <img src="../img/Mafi.jpg" width="30"class=" me-2"  />
+      <span>Maria Fernanda </span>
+      <button class="btn btn-sm btn-primary ms-auto">Agregar</button>
+    </li>
+  </ul>
+</div>
+
+<!-- Eventos -->
+<div class="card mb-3">
+  <div class="card-header">Eventos próximos</div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item"><strong>05 May:</strong> Cumpleaños de Carla</li>
+    <li class="list-group-item"><strong>08 May:</strong> Reunión de grupo</li>
+  </ul>
+</div>
+
+<!-- Publicidad -->
+<div class="card">
+  <div class="card-header">Publicidad</div>
+  <div class="card-body text-center">
+    <img src="../img/upcpublicidad.jpeg"  width="1400"class="img-fluid rounded" alt="Publicidad" />
+  </div>
+</div>
+
+
+<!-- Reloj en tiempo real -->
+
+
+<div class="card mb-3">
+  <div class="card-header">Hora actual</div>
+  <div class="card-body text-center">
+    <h4 id="reloj" class="mb-0"></h4>
+  </div>
+</div>
+
+</div>
+      </main>
+
+<script>
+    function actualizarReloj() {
+      const reloj = document.getElementById("reloj");
+      const ahora = new Date();
+      const hora = ahora.toLocaleTimeString();
+      reloj.textContent = hora;
+    }
+    setInterval(actualizarReloj, 1000);
+    actualizarReloj(); // iniciar al cargar
+  </script>
+
+
+</body>
+</html>

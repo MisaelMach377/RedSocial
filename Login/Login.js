@@ -23,7 +23,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
         confirmButtonText: 'Continuar'
       }).then(() => {
         // Redirigir después de cerrar el alert
-        window.location.href = '../Index/index.html';
+        window.location.href = '../Index/indexbt.html';
       });
     } else {
       // Mostrar error con SweetAlert
